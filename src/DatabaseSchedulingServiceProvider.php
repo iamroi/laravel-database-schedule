@@ -3,6 +3,7 @@
 namespace RobersonFaria\DatabaseSchedule;
 
 use Cron\CronExpression;
+use Illuminate\Support\Facades\Schema;
 use RobersonFaria\DatabaseSchedule\Console\Commands\PhpUnitTestJobCommand;
 use RobersonFaria\DatabaseSchedule\View\Helpers;
 use Illuminate\Foundation\AliasLoader;
