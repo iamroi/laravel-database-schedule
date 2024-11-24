@@ -9,7 +9,9 @@ class CommandService
 {
     public function get(): Collection
     {
-        $commands = collect(app(Kernel::class)->all())->sortKeys();
+        // TODO fix this for Laravel 11
+        // $commands = collect(app(Kernel::class)->all())->sortKeys();
+        $commands = collect();
         $commandsKeys = $commands->keys()->toArray();
         foreach (config('database-schedule.commands.exclude') as $exclude) {
             $commandsKeys = preg_grep("/^$exclude/", $commandsKeys, PREG_GREP_INVERT);
