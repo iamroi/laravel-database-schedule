@@ -2,16 +2,14 @@
 
 namespace RobersonFaria\DatabaseSchedule\Http\Services;
 
-use App\Console\Kernel;
+use Illuminate\Console\Application;
 use Illuminate\Support\Collection;
 
 class CommandService
 {
     public function get(): Collection
     {
-        // TODO fix this for Laravel 11
-        // $commands = collect(app(Kernel::class)->all())->sortKeys();
-        $commands = collect();
+        $commands = collect(app(Application::class, ['version' => 'UNKNOWN'])->all())->sortKeys();
         $commandsKeys = $commands->keys()->toArray();
         foreach (config('database-schedule.commands.exclude') as $exclude) {
             $commandsKeys = preg_grep("/^$exclude/", $commandsKeys, PREG_GREP_INVERT);
