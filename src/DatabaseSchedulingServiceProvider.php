@@ -63,10 +63,12 @@ class DatabaseSchedulingServiceProvider extends DatabaseScheduleApplicationServi
         }
 
         $this->app->resolving(BaseSchedule::class, function ($schedule) {
-            $schedule = app(Schedule::class, ['schedule' => $schedule]);
-            return $schedule->execute();
+            if (Schema::hasTable('schedules')) {
+                $schedule = app(Schedule::class, ['schedule' => $schedule]);
+                return $schedule->execute();
+            }
         });
-
+        
         $this->commands([
             TestJobCommand::class,
             PhpUnitTestJobCommand::class,
